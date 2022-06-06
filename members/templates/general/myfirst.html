@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>HOME</title>
-</head>
-<body>
+{% extends 'general/components/base.html' %}
 
-<h1>Hello World!</h1>
-<p>Welcome to my first Django project!</p>
+{% block site_title %}Home | {% endblock %}
 
-</body>
-</html>
+{% block content %}
+<div>
+    <h1>Hello World!</h1>
+    <p>Welcome to my first Django project!</p>
+</div>
+
+{% endblock  %}

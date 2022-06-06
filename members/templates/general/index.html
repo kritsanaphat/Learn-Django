@@ -1,16 +1,24 @@
-<h1>Members</h1>
+{% extends 'general/components/base.html' %}
 
+{% block site_title %}index |{% endblock %}
+
+{% block content %}
+
+<div>
+    <h1>Members</h1>
 <table border="1">
-{% for x in mymembers %}
-<tr>
-<td>{{ x.id }}</td>
-<td>{{ x.firstname }}</td>
-<td>{{ x.lastname }}</td>
-
-</tr>
-{% endfor %}
+    {% for x in mymembers %}
+    <tr>
+    <td>{{ x.id }}</td>
+    <td>{{ x.firstname }}</td>
+    <td>{{ x.lastname }}</td>
+    </tr>
+    {% endfor %}
 </table>
-
 <p>
     <a href="add">Add member</a>
-    </p>
+</p>
+</div>
+
+{% endblock  %}
+

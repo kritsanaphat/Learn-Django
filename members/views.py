@@ -10,7 +10,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from .models import Members
 from django.urls import reverse
-import uuid
+
 
 def home(request):
   template = loader.get_template('general/myfirst.html')

@@ -1,13 +1,22 @@
+{% extends 'general/components/base.html' %}
+
+{% block site_title %}add |{% endblock %}
+
+{% block content %}
+
+<div>
 <h1>Add member</h1>
-
 <form action="add/addrecord" method="post">
-{% csrf_token %}
-First Nafme:<br>
-<input name="first">
-<br><br>
-Last Name:<br>
-<input name="last">
-<br><br>
-
-<input type="submit" value="Submit">
+    {% csrf_token %}
+    First Nafme:<br>
+    <input name="first">
+    <br><br>
+    Last Name:<br>
+    <input name="last">
+    <br><br>
+    <input type="submit" value="Submit">
 </form>
+</div>
+
+{% endblock  %}
+
