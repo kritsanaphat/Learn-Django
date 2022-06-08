@@ -1,0 +1,15 @@
+
+{% extends 'general/components/base.html' %}
+
+{% block site_title %}หนังสือทั้งหมด | {% endblock %}
+
+{% block content %}
+<div>
+    <h1>Welcome to books page</h1>
+    {% for book in books %}
+        <h3><a href="{% url 'book' book.id %}">{{book.title}}</a></h3>
+        
+    {% endfor %}
+</div>
+
+{% endblock  %}
