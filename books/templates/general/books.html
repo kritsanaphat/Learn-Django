@@ -7,8 +7,15 @@
 <div>
     <h1>Welcome to Books page</h1>
     {% for book in books %}
-        <h3><a href="{% url 'book' book.id %}">{{book.title}}</a></h3>
-        
+        <div style="background-color:aqua">
+            <h3><a href="{% url 'book' book.id %}">{{book.title}}</a></h3>
+            <p>{{book.price}} บาท</p>
+            {% if book.is_premium %}
+                <p>**หนังสือระดับพรีเมียม</p>
+            {% endif %}
+        </div>
+    {% empty %}
+        <h2>ไม่มีข้อมูล**</h2>
     {% endfor %}
 </div>
 
