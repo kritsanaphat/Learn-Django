@@ -9,10 +9,11 @@
     {% for book in books %}
         <div style="background-color:aqua">
             <h3><a href="{% url 'book' book.id %}">{{book.title}}</a></h3>
-            <p>{{book.price}} บาท</p>
+            <p>{{book.price|floatformat:'g'}} บาท</p>
             {% if book.is_premium %}
                 <p>**หนังสือระดับพรีเมียม</p>
             {% endif %}
+            <p>โปรโมชั่นสิ้นสุด {{book.pmt_end|date:'j N Y'}}</p>
         </div>
     {% empty %}
         <h2>ไม่มีข้อมูล**</h2>
