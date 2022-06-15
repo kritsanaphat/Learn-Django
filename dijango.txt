@@ -64,3 +64,13 @@ py manage.py startapp members
 (1, {'books.Book': 1})   
 
 4.Read
+  - เพิ่่มข้อมูลอีก 1 ชุด
+ 4.1 ทั้งหมด
+	>>> all_book = Book.objects.all() 
+	>>> all_book
+		<QuerySet [<Book: Book object (1)>, <Book: Book object (3)>]>
+ 4.2 only พรีเมียม
+	>>> premium = Book.objects.filter(is_premium=True)   
+	>>> premium                                        
+		<QuerySet [<Book: Book object (3)>]>
+ 4.3 sort by premium
