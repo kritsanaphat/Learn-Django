@@ -1,0 +1,66 @@
+django-admin startproject myworld
+py manage.py runserver(run)
+py manage.py startapp members
+
+
+#conect with mysql#
+1. python -m pip install mysql-connector-python
+2. --edit at setting--------------
+		DATABASES = {
+    'default': {
+        'ENGINE': 'mysql.connector.django',
+        'NAME': 'django_Ahey',
+        'USER': 'root',
+        'PASSWORD':'qL7uxgdjbo',
+        'HOST':'127.0.0.1',
+        'PORT':'3306'
+    			}
+				}		
+--------------------------------
+
+3. python manage.py migrate 
+//////////////
+4. --edit at models(books)----------
+		from turtle import title
+		from django.db import models
+
+		# Create your models here.
+
+		class Book(models.Model):
+    			title = models.CharField(max_length=60)
+    			price = models.IntegerField()
+    			is_premium = models.BooleanField(null=False)
+    			pmt_end = models.DateTimeField(null=False)
+
+----------------------------
+5. python manage.py makemigrations books(name folder)   
+6. python manage.py migrate
+
+
+#เล่น model#
+1. create
+>>> from books.models import Book
+>>> book1 = Book()
+>>> book1.title = 'Atomic Habits'
+>>> book1.price = 28
+>>> book1.save()
+
+2. edit
+>>> book1.special_price = 25
+>>> book1.description = 'บทพิสูจน์ที่เปลี่ยนชีวิตคุณให้ดีขึ้นได้อย่างถาวร จากนักเขียนหนังสือขายดีของ New York Times ผู้เชี่ยวชาญระดับโลกด้านการสร้างนิสัย'
+>>> from datetime import datetime
+>>> from zoneinfo import ZoneInfo
+>>> date1 = datetime(2023,2,14,tzinfo = ZoneInfo('Asia/Bangkok')) 
+>>> book1.pmt_end = date1                                        
+>>> book1.save()  
+
+3. Delete
+>>> from books.models import Book
+>>> book2 = Book()
+>>> book2.title = 'Atomic Habits' 
+>>> book2.price = 28 
+>>> book2.save()     
+>>> book2.delete()  
+(1, {'books.Book': 1})   
+
+4.Read
