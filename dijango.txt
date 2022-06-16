@@ -37,7 +37,9 @@ py manage.py startapp members
 6. python manage.py migrate
 
 
-#เล่น model#
+#เล่น model#( py manage.py shell)
+
+-----Book-------
 1. create
 >>> from books.models import Book
 >>> book1 = Book()
@@ -74,3 +76,66 @@ py manage.py startapp members
 	>>> premium                                        
 		<QuerySet [<Book: Book object (3)>]>
  4.3 sort by premium
+    >>> all_premium_sort = Book.objects.all().order_by('-is_premium') ##('is_premium' จะเรียงแบบ Reverse )
+	>>> all_premium_sort
+		<QuerySet [<Book: Book object (3)>, <Book: Book object (1)>]>
+ 4.4  pagination
+	>>> all_page_books = Book.objects.all()[0:1] 
+	>>> all_page_books
+		<QuerySet [<Book: Book object (1)>]>
+	>>> all_page_books = Book.objects.all()[0:2] 
+	>>> all_page_books
+		<QuerySet [<Book: Book object (1)>, <Book: Book object (3)>]>
+	>>> all_page_books = Book.objects.all()[1:2] 
+	>>> all_page_books
+		<QuerySet [<Book: Book object (3)>]>
+ 4.5 Read one book
+ 	>>> one_book = Book.objects.get(id=1)
+	>>> one_book.title
+		'Atomic Habits'
+-----EndBook-------
+
+-----members-----
+1. create 
+	1.1 one to one 
+		book = models.OneToOneField('books.Book',on_delete=models.SET_NULL,null=True) #(models in members)
+	1.2 many to one
+		book = models.ForeignKey('books.Book',on_delete=models.SET_NULL,null=True)
+	1.3 many to many
+		book_set = models.ManyToManyField('books.Book') #many to many
+2. Relation
+	2.1 สร้างข้อมูลทั้งสองฝั่งให้เรียบร้อย
+	2.2 เชื่อมข้อมูล
+	
+	>>> from books.models import Book
+	>>> from members.models import Member
+	>>> selected_book = Book.objects.filter(id__in=[1,3])
+	>>> selected_book
+		<QuerySet [<Book: Book object (1)>, <Book: Book object (3)>]>
+	>>> mem1.book_set.set(selected_book) (Done.)
+
+3. update
+	>>> selected_book2 = Book.objects.filter(id__in=[3])
+	>>> mem1.book_set.set(selected_book2) 
+
+4. delete
+	>>> mem3.delete()
+
+5. read one with Relation
+	>>> one_book = Book.objects.get(id=3)
+	>>> one_book.title
+		'Think again'
+	>>> book_mem = one_book.members_set.all() 
+	>>> book_mem
+		<QuerySet [<Members: Members object (1)>, <Members: Members object (2)>]>
+
+6. read all with Relation
+	>>> all_mem = Members.objects.all()
+	>>> all_mem[0]
+		<Members: Members object (1)>
+	>>> mem1_books = all_mem[0].book_set.all()
+	>>> mem1_books
+		<QuerySet [<Book: Book object (1)>, <Book: Book object (3)>]>
+	>>> mem2_books = all_mem[1].book_set.all()
+	>>> mem2_books
+		<QuerySet [<Book: Book object (1)>, <Book: Book object (3)>]>
