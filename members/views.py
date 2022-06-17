@@ -41,3 +41,15 @@ def addrecord(request):
 
 def id(requset,id):
   return HttpResponse('ชื่อผู้ใช้งาน = '+str(id))
+
+
+from books.models import Book
+def subscription(requset):
+  all_book = Book.objects.order_by('-is_premium')
+  context = {'book':all_book}
+  template = loader.get_template('general/subscription.html')
+  return HttpResponse(template.render(context))
+
+def thankyou_subscription(request):
+  template = loader.get_template('general/thankyou_subscription.html')
+  return HttpResponse(template.render())

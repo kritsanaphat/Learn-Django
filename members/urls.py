@@ -1,3 +1,4 @@
+from unicodedata import name
 from django.urls import path
 from . import views
 
@@ -7,5 +8,7 @@ urlpatterns = [
     path('index', views.index, name ='index'),
     path('add'  , views.add  , name = 'add'),
     path('add/addrecord', views.addrecord, name='addrecord'),
-    path('<str:id>',views.id,name='id') #dynamic link
+    path('subscription',views.subscription,name='subscription'),
+    path('subscription/thankyou',views.thankyou_subscription,name='thankyou_subscription'),
+    path('<str:id>',views.id,name='id'), #dynamic link
 ]

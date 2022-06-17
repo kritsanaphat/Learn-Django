@@ -1,0 +1,24 @@
+{% extends 'general/components/base.html' %}
+
+{% block site_title %}subsciption |{% endblock %}
+
+{% block content %}
+
+<from>
+    <h2>ลงทะเบียน</h2>
+    <div>
+        <label>ชื่อ-นามสกุล</label>
+        <input type="text">
+    <div>
+    
+    <div>
+    <label>หนังสือที่สนใจ</label>
+        {% for b in book %}
+            <input type="checkbox"> <label> {{b.title}}</label>
+        {% endfor %}
+    </div>
+
+    <a href="{% url 'thankyou_subscription'%}">ลงทะเบียน</a>
+</from>
+
+{% endblock  %}
