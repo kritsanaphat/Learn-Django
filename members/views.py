@@ -5,6 +5,7 @@
 # def index(request):
 #     return HttpResponse("Hello world!")
 #-------------------
+from email.policy import HTTP
 from re import template
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
@@ -44,7 +45,13 @@ def id(requset,id):
 
 
 from books.models import Book
-def subscription(requset):
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def subscription(request):
+  if request.method == 'POST':
+    print(request.POST)
+    return HttpResponseRedirect(reverse('thankyou_subscription'))
   all_book = Book.objects.order_by('-is_premium')
   context = {'book':all_book}
   template = loader.get_template('general/subscription.html')

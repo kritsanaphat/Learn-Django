@@ -4,21 +4,30 @@
 
 {% block content %}
 
-<from>
+<form action="{% url 'subscription' %}" method="post">
+    {% csrf_token %}
     <h2>ลงทะเบียน</h2>
-    <div>
-        <label>ชื่อ-นามสกุล</label>
-        <input type="text">
-    <div>
-    
-    <div>
+    <div style="margin-bottom: 16px;">
+        <label>ชื่อ</label>
+        <input type="text" name="fristname">
+    </div>
+    <div style="margin-bottom: 16px;">
+        <label>นามสกุล</label>
+        <input type="text" name="lastname">
+    </div>
+    <div style="margin-bottom: 16px;">
+        <label>Email</label>
+        <input type="text" name="email">
+        <br>
+    </div>
+    <div style="margin-bottom: 16px;">
     <label>หนังสือที่สนใจ</label>
         {% for b in book %}
-            <input type="checkbox"> <label> {{b.title}}</label>
+            <input type="checkbox" name = "book_ids[]" value="{{book.id}}"> <label> {{b.title}}</label>
         {% endfor %}
     </div>
 
-    <a href="{% url 'thankyou_subscription'%}">ลงทะเบียน</a>
-</from>
+    <button type="submit">ลงทะเบียนรับโปรโมชั่น</button>
+</form>
 
 {% endblock  %}
