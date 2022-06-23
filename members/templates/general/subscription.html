@@ -5,27 +5,9 @@
 {% block content %}
 
 <form action="{% url 'subscription' %}" method="post">
-    {% csrf_token %}
+    {% csrf_token from .models import Book%}
     <h2>ลงทะเบียน</h2>
-    <div style="margin-bottom: 16px;">
-        <label>ชื่อ</label>
-        <input type="text" name="fristname">
-    </div>
-    <div style="margin-bottom: 16px;">
-        <label>นามสกุล</label>
-        <input type="text" name="lastname">
-    </div>
-    <div style="margin-bottom: 16px;">
-        <label>Email</label>
-        <input type="text" name="email">
-        <br>
-    </div>
-    <div style="margin-bottom: 16px;">
-    <label>หนังสือที่สนใจ</label>
-        {% for b in book %}
-            <input type="checkbox" name = "book_ids[]" value="{{book.id}}"> <label> {{b.title}}</label>
-        {% endfor %}
-    </div>
+    {{ form.as_p }}
 
     <button type="submit">ลงทะเบียนรับโปรโมชั่น</button>
 </form>

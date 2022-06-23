@@ -5,10 +5,15 @@
 # def index(request):
 #     return HttpResponse("Hello world!")
 #-------------------
+import email
 from email.policy import HTTP
+from multiprocessing import context
 from re import template
+from unicodedata import name
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
+
+from members.forms import subscription_form
 from .models import Members
 from django.urls import reverse
 
@@ -50,10 +55,11 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def subscription(request):
   if request.method == 'POST':
-    print(request.POST)
+
+
     return HttpResponseRedirect(reverse('thankyou_subscription'))
-  all_book = Book.objects.order_by('-is_premium')
-  context = {'book':all_book}
+  form = subscription_form
+  context = {'form':form}
   template = loader.get_template('general/subscription.html')
   return HttpResponse(template.render(context))
 
