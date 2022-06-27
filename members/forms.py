@@ -1,10 +1,12 @@
 from cProfile import label
+from dataclasses import field
 import re
 from tkinter import Widget
 import django
 from django import forms
 from pkg_resources import require
 from books.models import Book
+from .models import Members
 
 # class BookMultipleChoiceField(forms.ModelMultipleChoiceField):
 #     def lable_from_instance(self, obj):
@@ -22,3 +24,23 @@ class subscription_form(forms.Form):
         widget = forms.CheckboxSelectMultiple
     )
     accepted = forms.BooleanField(required=True,label='ยอมรับข้อตกลง')
+
+class subscriptionModel_form(forms.ModelForm):
+    book_set = forms.ModelMultipleChoiceField(
+            queryset=Book.objects.order_by('-is_premium'), 
+            required=True, 
+            label='หนังสือที่สนใจ', 
+            widget = forms.CheckboxSelectMultiple
+            )
+    accepted = forms.BooleanField(required=True,label='ยอมรับข้อตกลงก่อนลงทะเบียน')
+    class Meta:
+            model = Members
+            fields = ['firstname', 'lastname', 'email', 'book_set']
+            labels = {
+                'firstname': 'ชื่อ',
+                'lastname': 'นามสกุล',
+                'email': 'อีเมลล์',
+                'book_set': 'หนังสือที่สนใจ',
+            }
+            
+

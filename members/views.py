@@ -6,7 +6,6 @@
 #     return HttpResponse("Hello world!")
 #-------------------
 from ast import Subscript
-import email
 from email.policy import HTTP
 from multiprocessing import context
 from re import template
@@ -14,7 +13,7 @@ from unicodedata import name
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 
-from members.forms import subscription_form
+from members.forms import subscription_form,subscriptionModel_form
 from .models import Members
 from django.urls import reverse
 
@@ -56,18 +55,12 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def subscription(request):
   if request.method == 'POST':
-    form = subscription_form(request.POST)
+    form = subscriptionModel_form(request.POST)
     if form.is_valid():
-      data = form.cleaned_data
-      new_sub = Members()
-      new_sub.firstname = data['firstname']
-      new_sub.lastname = data['lastname']
-      new_sub.email = data['email']
-      new_sub.save()
-      new_sub.book_set.set(data['book_set'])
+      form.save()
       return HttpResponseRedirect(reverse('thankyou_subscription'))
   else:
-      form = subscription_form()
+      form = subscriptionModel_form()
   context = {'form':form}
   template = loader.get_template('general/subscription.html')
   return HttpResponse(template.render(context))
