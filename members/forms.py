@@ -12,7 +12,7 @@ from books.models import Book
 
 
 class subscription_form(forms.Form):
-    fristname = forms.CharField(max_length=255, required=True, label='ชื่อ')
+    firstname = forms.CharField(max_length=255, required=True, label='ชื่อ')
     lastname = forms.CharField(max_length=255, required=True, label='นามสกุล')
     email = forms.EmailField(max_length=60, required=True, label='อีเมลล์')
     book_set = forms.ModelMultipleChoiceField(

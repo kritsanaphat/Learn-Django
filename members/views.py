@@ -56,9 +56,18 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def subscription(request):
   if request.method == 'POST':
-    form = subscriptionForm()
-    return HttpResponseRedirect(reverse('thankyou_subscription'))
-  form = subscription_form
+    form = subscription_form(request.POST)
+    if form.is_valid():
+      data = form.cleaned_data
+      new_sub = Members()
+      new_sub.firstname = data['firstname']
+      new_sub.lastname = data['lastname']
+      new_sub.email = data['email']
+      new_sub.save()
+      new_sub.book_set.set(data['book_set'])
+      return HttpResponseRedirect(reverse('thankyou_subscription'))
+  else:
+      form = subscription_form()
   context = {'form':form}
   template = loader.get_template('general/subscription.html')
   return HttpResponse(template.render(context))
