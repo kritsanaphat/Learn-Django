@@ -5,6 +5,7 @@
 # def index(request):
 #     return HttpResponse("Hello world!")
 #-------------------
+from ast import Subscript
 import email
 from email.policy import HTTP
 from multiprocessing import context
@@ -55,8 +56,7 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def subscription(request):
   if request.method == 'POST':
-
-
+    form = subscriptionForm()
     return HttpResponseRedirect(reverse('thankyou_subscription'))
   form = subscription_form
   context = {'form':form}

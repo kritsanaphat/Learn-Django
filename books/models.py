@@ -10,3 +10,6 @@ class Book(models.Model):
     is_premium = models.BooleanField(default=False)
     pmt_end = models.DateTimeField(null=True)
     description = models.TextField(null=True)
+    
+    def __str__(self) -> str:
+        return "{}".format(self.title)

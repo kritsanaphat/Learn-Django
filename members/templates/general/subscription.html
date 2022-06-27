@@ -7,7 +7,32 @@
 <form action="{% url 'subscription' %}" method="post">
     {% csrf_token from .models import Book%}
     <h2>ลงทะเบียน</h2>
-    {{ form.as_p }}
+    <div style="margin-bottom: 16px;">
+        {{ form.fristname.label_tag }}
+        {{ form.fristname }}
+    </div>
+    <div style="margin-bottom: 16px;">
+        {{ form.lastname.label_tag }}
+        {{ form.lastname }}
+    </div>
+    <div style="margin-bottom: 16px;">
+        {{ form.email.label_tag }}
+        {{ form.email }}
+    </div>
+    <div style="margin-bottom: 16px;">
+        {{ form.book_set.label_tag }}
+        {{ form.book_set }}
+    </div>
+    <div style="margin-bottom: 16px;">
+        <label>ยอมรับข้อตกลง</label>
+        <label>
+            {{ form.accepted }}
+            {{ form.accepted.label }}
+        </label>
+       
+        
+    </div>
+    <!-- {{ form.as_p }} -->
 
     <button type="submit">ลงทะเบียนรับโปรโมชั่น</button>
 </form>

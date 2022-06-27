@@ -18,3 +18,5 @@ class Members(models.Model):
   #book = models.OneToOneField('books.Book',on_delete=models.SET_NULL,null=True)  -- One to One
   #book = models.ForeignKey('books.Book',on_delete=models.SET_NULL,null=True) --One to Many (user สามารถเลือกหนังสือซ้ำกันได้ แต่เลือกได้แค่คนละเล่ม)
   book_set = models.ManyToManyField('books.Book') #many to many
+
+  
