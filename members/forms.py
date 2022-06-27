@@ -40,7 +40,7 @@ class subscriptionModel_form(forms.ModelForm):
                 'firstname': 'ชื่อ',
                 'lastname': 'นามสกุล',
                 'email': 'อีเมลล์',
-                'book_set': 'หนังสือที่สนใ',
+                'book_set': 'หนังสือที่สนใจ',
             }
             
 
